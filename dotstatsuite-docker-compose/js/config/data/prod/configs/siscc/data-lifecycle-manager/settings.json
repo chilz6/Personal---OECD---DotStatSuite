@@ -1,0 +1,78 @@
+{
+  "sdmx": {
+    "datasourceIds": [
+      "staging:SIS-CC-stable",
+      "staging:SIS-CC-reset"
+    ],
+    "datasources": {
+      "staging:SIS-CC-stable": {
+        "color": "white",
+        "backgroundColor": "#606A80",
+        "dataExplorerUrl": "http://de-staging-siscc.redpelicans.com"
+      },
+      "staging:SIS-CC-reset": {
+        "color": "white",
+        "backgroundColor": "#735667",
+        "dataExplorerUrl": "http://de-staging-siscc.redpelicans.com"
+      }
+    },
+    "typeIds": [
+      "agencyscheme",
+      "attachmentconstraint",
+      "categoryscheme",
+      "categorisation",
+      "codelist",
+      "conceptscheme",
+      "contentconstraint",
+      "dataconsumerscheme",
+      "dataproviderscheme",
+      "datastructure",
+      "dataflow",
+      "hierarchicalcodelist",
+      "metadatastructure",
+      "metadataflow",
+      "organisationscheme",
+      "organisationunitscheme",
+      "process",
+      "provisionagreement",
+      "reportingtaxonomy",
+      "structureset"
+    ],
+    "uploadSizeLimit": 30000000
+  },
+  "i18n": {
+    "localeId": "en",
+    "locales": {
+      "en": {
+        "id": "en",
+        "delimiters": { "thousands": ",", "decimal": "."  },
+        "timeFormat": "YYYY-MMM"
+      },
+      "fr": {
+        "id": "fr",
+        "delimiters": { "thousands": " ", "decimal": ","  },
+        "timeFormat": "MMM YYYY"
+      },
+      "es": {
+        "id": "es",
+        "delimiters": { "thousands": ",", "decimal": "."  },
+        "timeFormat": "YYYY-MMM"
+      },
+      "it": {
+        "id": "it",
+        "delimiters": { "thousands": " ", "decimal": ","  },
+        "timeFormat": "MMM YYYY"
+      },
+      "ar": {
+        "id": "ar",
+        "isRtl": "true",
+        "delimiters": { "thousands": " ", "decimal": ","  }
+      }
+    }
+  },
+  "assets": {
+    "logo": "/assets/siscc/data-lifecycle-manager/images/logo.png",
+    "icon": "/assets/siscc/data-lifecycle-manager/images/sis-cc-icon.png"
+  },
+  "styles": "/assets/siscc/data-lifecycle-manager/styles/styles.css"
+}

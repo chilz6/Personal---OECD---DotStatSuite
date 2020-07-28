@@ -1,0 +1,92 @@
+{
+  "sdmx": {
+    "datasourceIds": ["SIS-CC-stable"],
+    "range": [0, 1000],
+    "attributes": {
+      "flags": ["OBS_STATUS"],
+      "footnotes": ["TIME_FORMAT"],
+      "prefscale": "PREF_SCALE", 
+      "decimals": "DECIMALS"
+    },
+    "units": {
+      "id": "UNIT",
+      "annotationsDefinitionCodes": {
+        "concepts": ["UNIT_MEASURE_CONCEPTS"]
+      },
+      "defaultCodes": ["UNIT_MEASURE", "UNIT_MULT", "BASE_PER"],
+      "rejectedValueIds": ["_L", "_T", "_Z"]
+    },
+    "period": {
+      "boundaries": ["1970", "2020"],
+      "default": ["2010", "2018"]
+    },
+    "frequency": "A"
+  },
+  "viewer": {
+    "owner": "ABS",
+    "logo": "/assets/siscc/data-explorer/images/sis-cc-logo.png",
+    "terms": {
+      "label": "Terms & Conditions",
+      "link": ""
+    },
+    "api": {
+      "doc": "",
+      "contact": ""
+    }
+  },
+  "app": {
+    "title": "ABS Data Explorer",
+    "favicon": "/assets/siscc/data-explorer/images/favicon.ico"
+  },
+  "assets": {
+    "header": "/assets/abs/images/logo.png",
+    "subheader": "/assets/siscc/data-explorer/images/dotstat-data-explorer-logo.png",
+    "footer": "/assets/siscc/data-explorer/images/sis-cc-icon.png",
+    "splash": "/assets/siscc/data-explorer/images/dotstat-data-explorer-logo.png"
+  },
+  "chart": {
+    "url": "",
+    "source": "",
+    "maps": {},
+    "options": {
+      "base": { "height": 700 },
+      "axis": {
+        "x": { "font": { "family": "'Segoe UI'" } },
+        "y": { "font": { "family": "'Segoe UI'" } }
+      },
+      "serie": {
+        "annotation": { "font": { "family": "'Segoe UI'" } },
+        "tooltip": { "font": { "family": "'Segoe UI'" } }
+      }
+    },
+    "size": { "height": 400 }
+  },
+  "table": {
+    "cellsLimit": 4000
+  },
+  "theme": {
+    "visFont": "'Segoe UI'"
+  },
+  "i18n": {
+    "localeId": "en",
+    "locales": {
+      "en": {
+        "id": "en",
+        "delimiters": { "thousands": ",", "decimal": "."  },
+        "timeFormat": "YYYY-MMM"
+      }
+    }
+  },
+  "ga": {},
+  "styles": "/assets/siscc/data-explorer/styles/styles.css",
+  "search": {
+    "endpoint": "http://sfs-staging-oecd.redpelicans.com/api",
+    "homeFacetIds": ["Topics", "datasourceId"],
+    "defaultRows": 10
+  },
+  "share": {
+    "confirmUrl": "http://dv-staging-oecd.redpelicans.com",
+    "endpoint": "http://share-staging-oecd.redpelicans.com/api/charts",
+    "policy": ""
+  }
+}

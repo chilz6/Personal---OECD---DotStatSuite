@@ -1,0 +1,24 @@
+{
+  "staging:SIS-CC-stable": {
+    "label": "staging:SIS-CC-stable",
+    "url": "https://stable.dotstat.mmjabr.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "hasLastNObservations": false,
+    "indexed": true,
+    "queries": [
+      { "version": "1.0.0", "categorySchemeId": "FCSA", "agencyId": "FCSA"}
+    ]
+  },
+  "staging:SIS-CC-reset": {
+    "label": "staging:SIS-CC-reset",
+    "url": "https://reset.dotstat.mmjabr.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "hasLastNObservations": true,
+    "indexed": true,
+    "queries": [
+      { "version": "1.0.0", "categorySchemeId": "FCSA", "agencyId": "FCSA" }
+    ]
+  }
+}

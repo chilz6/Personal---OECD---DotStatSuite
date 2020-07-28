@@ -1,0 +1,53 @@
+{
+  "staging:SIS-CC-stable": {
+    "label": "staging:SIS-CC-stable",
+    "url": "http://nsi-stable-siscc.redpelicans.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "indexed": true,
+    "queries": [
+      { "version": "1.0", "categorySchemeId": "OECDCS1", "agencyId": "OECD" },
+      { "version": "1.0", "categorySchemeId": "CAS_2", "agencyId": "OECD"},
+      { "version": "1.0", "categorySchemeId": "LU1_CS", "agencyId": "LU1"},
+      { "version": "1.0.0", "categorySchemeId": "ABS_TOPICS", "agencyId": "ABS"},
+      { "version": "1.1", "categorySchemeId": "CL_CS_DISS", "agencyId": "TN1"}
+    ]
+  },
+  "staging:SIS-CC-reset": {
+    "label": "staging:SIS-CC-reset",
+    "url": "http://nsi-reset-siscc.redpelicans.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "indexed": false,
+    "queries": [
+      { "version": "1.0", "categorySchemeId": "OECDCS1", "agencyId": "OECD" }
+    ]
+  },
+  "OECD-design": {
+    "label": "OECD-design",
+    "url": "http://nsi-design-oecd.redpelicans.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "indexed": false,
+    "queries": [
+      { "version": "1.0", "categorySchemeId": "OECDCS1", "agencyId": "OECD" }
+    ]
+  },
+  "OECD-staging": {
+    "label": "OECD-staging",
+    "url": "http://nsi-staging-oecd.redpelicans.com/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "indexed": true,
+    "queries": [
+      { "version": "1.0", "categorySchemeId": "OECDCS1", "agencyId": "OECD" }
+    ]
+  },
+  "OECD-stats": {
+    "label": "OECD-stats",
+    "url": "https://stats.oecd.org/nsiws/rest",
+    "hasRangeHeader": true,
+    "supportsReferencePartial": true,
+    "indexed": false
+  }
+}

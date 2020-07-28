@@ -1,0 +1,134 @@
+stages:
+  - setup
+  - test
+  - build
+  - release-dev
+  - release-prod
+  - deploy-qa
+  - deploy-staging
+
+variables:
+  NODE_VERSION: node:11.10-alpine
+  DEV_IMAGE: siscc/dotstatsuite-config-dev
+  CONTAINER_DEV_IMAGE: $DEV_IMAGE:$CI_COMMIT_SHORT_SHA
+  TAG_CONTAINER_DEV_IMAGE: $DEV_IMAGE:$CI_COMMIT_REF_NAME
+  LATEST_CONTAINER_DEV_IMAGE: $DEV_IMAGE:latest
+  PROD_IMAGE: siscc/dotstatsuite-config-prod
+  CONTAINER_PROD_IMAGE: $PROD_IMAGE:$CI_COMMIT_SHORT_SHA
+  TAG_CONTAINER_PROD_IMAGE: $PROD_IMAGE:$CI_COMMIT_REF_NAME
+  LATEST_CONTAINER_PROD_IMAGE: $PROD_IMAGE:latest
+  DOCKER_REGISTRY: https://index.docker.io/v1/
+
+setup:
+  stage: setup
+  image: $NODE_VERSION
+  script:
+    - yarn
+  artifacts:
+    paths:
+      - node_modules/
+  tags:
+    - kube
+    - oecd
+
+test:
+  stage: test
+  image: $NODE_VERSION
+  script:
+    - yarn test --coverage
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  dependencies:
+    - setup
+  tags:
+    - kube
+    - oecd
+
+build:
+  stage: build
+  image: $NODE_VERSION
+  artifacts:
+    paths:
+      - dist/
+  script:
+    - yarn dist
+  tags:
+    - kube
+    - oecd
+
+release-dev:
+  stage: release-dev
+  image: 
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$DOCKER_AUTH_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.dev --destination $CONTAINER_DEV_IMAGE --destination $TAG_CONTAINER_DEV_IMAGE --destination $LATEST_CONTAINER_DEV_IMAGE
+  dependencies:
+    - setup
+    - build
+  only:
+    - develop
+  tags:
+    - kube
+    - oecd
+
+release-prod:
+  stage: release-prod
+  image: 
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$DOCKER_AUTH_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.prod --destination $CONTAINER_PROD_IMAGE --destination $TAG_CONTAINER_PROD_IMAGE --destination $LATEST_CONTAINER_PROD_IMAGE
+  dependencies:
+    - setup
+    - build
+  only:
+    - master
+  tags:
+    - kube
+    - oecd
+
+deploy-qa:
+  stage: deploy-qa
+  image: google/cloud-sdk
+  before_script:
+    - echo ${KUBE_ACCOUNT_KEY} | base64 -di > key.json
+  script:
+    - gcloud auth activate-service-account --key-file=key.json
+    - gcloud config set project oecd-228113
+    - gcloud config set container/cluster oecd
+    - gcloud config set compute/region europe-west1-b
+    - gcloud container clusters get-credentials oecd --region europe-west1-b
+    - kubectl get pods -n qa -o wide
+    - kubectl set image deployment/config config=$CONTAINER_DEV_IMAGE -n qa
+    - kubectl set env deployment/config GIT_HASH=$CI_COMMIT_SHA -n qa
+  only:
+    - develop
+  environment:
+    name: qa
+  tags:
+    - kube
+    - oecd
+
+deploy-staging:
+  stage: deploy-staging
+  image: google/cloud-sdk
+  before_script:
+    - echo ${KUBE_ACCOUNT_KEY} | base64 -di > key.json
+  script:
+    - gcloud auth activate-service-account --key-file=key.json
+    - gcloud config set project oecd-228113
+    - gcloud config set container/cluster oecd
+    - gcloud config set compute/region europe-west1-b
+    - gcloud container clusters get-credentials oecd --region europe-west1-b
+    - kubectl get pods -n staging -o wide
+    - kubectl set image deployment/config config=$CONTAINER_PROD_IMAGE -n staging
+    - kubectl set env deployment/config GIT_HASH=$CI_COMMIT_SHA -n staging
+  only:
+    - master
+  environment:
+    name: staging
+  tags:
+    - kube
+    - oecd

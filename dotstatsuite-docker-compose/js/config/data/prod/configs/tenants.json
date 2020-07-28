@@ -1,0 +1,36 @@
+{
+  "default": {
+    "id": "default",
+    "name": "default"
+  },
+  "oecd": {
+    "id": "oecd",
+    "name": "OECD",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  },
+  "siscc": {
+    "id": "siscc",
+    "name": "SISCC",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  },
+  "abs": {
+    "id": "abs",
+    "name": "ABS",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  },
+  "statsnz": {
+    "id": "statsnz",
+    "name": "STATSNZ",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  },
+  "astat": {
+    "id": "astat",
+    "name": "ASTAT",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  },
+  "statec": {
+    "id": "statec",
+    "name": "STATEC",
+    "keycloak": { "realm": "OECD", "clientId": "app" }
+  }
+}
