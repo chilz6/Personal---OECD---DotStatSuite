@@ -125,6 +125,7 @@ services:
       REDIS_PORT: 6379
       SOLR_HOST: solr
       SOLR_PORT: 8983
+      API_KEY: ${API_KEY}
       #REDIS_HOST: ${REDIS_HOST}
       #REDIS_PORT: 443
       #SOLR_HOST: ${SOLR_HOST}
