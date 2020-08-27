@@ -33,7 +33,7 @@ services:
             SQL_PASSWORD: ${STRUCT_DB_RESET_PWD}
             SENDER_ID: "Reset - DotStat v8"
             DATASPACE_ID: "staging:SIS-CC-reset"            
-            MA_DB_VERSION: 6.7
+            #MA_DB_VERSION: 6.7
             MA_SQL_USER: sa
             MA_SQL_PASSWORD: ${SA_PASSWORD}
             #Reset
@@ -76,11 +76,11 @@ services:
             SQL_PASSWORD: ${STRUCT_DB_STABLE_PWD}      
             SENDER_ID: "Stable - DotStat v8"
             DATASPACE_ID: "staging:SIS-CC-stable"            
-            MA_DB_VERSION: 6.7
+            #MA_DB_VERSION: 6.7
             MA_SQL_USER: sa
             MA_SQL_PASSWORD: ${SA_PASSWORD}
             #Persist
-            MA_ALWAYS_RESET: N
+            MA_ALWAYS_RESET: Y
             INSERT_NEW_ITEM_SCHEME_VALUES: "false"
         depends_on: 
           - auth-service
