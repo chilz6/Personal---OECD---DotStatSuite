@@ -5,7 +5,7 @@ version: "3"
 services:
             
     nsiws-reset:
-        image: siscc/dotstatsuite-core-sdmxri-nsi
+        image: siscc/dotstatsuite-core-sdmxri-nsi:e063abdc
         container_name: nsiws-reset
         ports:
           - "${NSI_RESET_PORT}:80"       
@@ -48,7 +48,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db '${STRUCT_DB_RESET_USER}' '${STRUCT_DB_RESET_PWD}' '${STRUCT_DB_RESET}' && ./entrypoint.sh"  
     
     nsiws-stable:
-        image: siscc/dotstatsuite-core-sdmxri-nsi
+        image: siscc/dotstatsuite-core-sdmxri-nsi:e063abdc
         container_name: nsiws-stable
         ports:
           - "${NSI_STABLE_PORT}:80"
@@ -91,7 +91,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db '${STRUCT_DB_STABLE_USER}' '${STRUCT_DB_STABLE_PWD}' '${STRUCT_DB_STABLE}' && ./entrypoint.sh"          
           
     transfer-service:
-        image: siscc/dotstatsuite-core-transfer
+        image: siscc/dotstatsuite-core-transfer:23d51989
         container_name: transfer-service
         environment:
             auth__Enabled: ${AUTH_ENABLED}
@@ -141,7 +141,7 @@ services:
           - dbup-struct-stable
               
     auth-service:
-        image: siscc/dotstatsuite-core-auth-management
+        image: siscc/dotstatsuite-core-auth-management:9a653e82
         container_name: auth-service
         environment:
             auth__enabled: ${AUTH_ENABLED}
@@ -164,7 +164,7 @@ services:
           - dbup-common
           
     dbup-struct-reset:
-        image: siscc/dotstatsuite-dbup
+        image: siscc/dotstatsuite-dbup:b81d01dd
         container_name: dbup-struct-reset
         environment:
             EXECUTION_PARAMETERS: upgrade --connectionString Server=db;Database=${STRUCT_DB_RESET};User=sa;Password=${SA_PASSWORD}; --mappingStoreDb --loginName ${STRUCT_DB_RESET_USER} --loginPwd ${STRUCT_DB_RESET_PWD} --force --dropDb 
@@ -175,7 +175,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db sa ${SA_PASSWORD} && dotnet DotStat.DbUp.dll $$EXECUTION_PARAMETERS"
           
     dbup-data-reset:
-        image: siscc/dotstatsuite-dbup
+        image: siscc/dotstatsuite-dbup:b81d01dd
         container_name: dbup-data-reset
         environment:
             EXECUTION_PARAMETERS: upgrade --connectionString Server=db;Database=${DATA_DB_RESET};User=sa;Password=${SA_PASSWORD}; --dataDb --loginName ${DATA_DB_RESET_USER} --loginPwd ${DATA_DB_RESET_PWD} --force --dropDb 
@@ -186,7 +186,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db sa ${SA_PASSWORD} && dotnet DotStat.DbUp.dll $$EXECUTION_PARAMETERS"
         
     dbup-struct-stable:
-        image: siscc/dotstatsuite-dbup
+        image: siscc/dotstatsuite-dbup:b81d01dd
         container_name: dbup-struct-stable
         environment:
             EXECUTION_PARAMETERS: upgrade --connectionString Server=db;Database=${STRUCT_DB_STABLE};User=sa;Password=${SA_PASSWORD}; --mappingStoreDb --loginName ${STRUCT_DB_STABLE_USER} --loginPwd ${STRUCT_DB_STABLE_PWD} --force 
@@ -197,7 +197,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db sa ${SA_PASSWORD} && dotnet DotStat.DbUp.dll $$EXECUTION_PARAMETERS"
         
     dbup-data-stable:
-        image: siscc/dotstatsuite-dbup
+        image: siscc/dotstatsuite-dbup:b81d01dd
         container_name: dbup-data-stable
         environment:
             EXECUTION_PARAMETERS: upgrade --connectionString Server=db;Database=${DATA_DB_STABLE};User=sa;Password=${SA_PASSWORD}; --dataDb --loginName ${DATA_DB_STABLE_USER} --loginPwd ${DATA_DB_STABLE_PWD} --force 
@@ -208,7 +208,7 @@ services:
         entrypoint: bash -c "/tool/wait4sql db sa ${SA_PASSWORD} && dotnet DotStat.DbUp.dll $$EXECUTION_PARAMETERS"
           
     dbup-common:
-        image: siscc/dotstatsuite-dbup
+        image: siscc/dotstatsuite-dbup:b81d01dd
         container_name: dbup-common
         depends_on: 
           - db
