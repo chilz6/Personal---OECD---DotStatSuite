@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
